@@ -1,0 +1,41 @@
+name: SonarQube CLI Python Scan
+
+on:
+  push:
+    branches:
+      - merge_requests
+      - master
+      - develop
+    paths:
+      - '.github/workflows/cli-scan.yaml'
+      - '.gitignore'
+      - 'comp-cli/**/*'
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '.github/workflows/cli-scan.yaml'
+      - '.gitignore'
+      - 'comp-cli/**/*'
+  
+
+  workflow_dispatch:
+
+env:
+  SONAR_HOST_URL: <SONARQUBE_URL>
+  SONAR_TOKEN: <SONARQUBE_TOKEN>
+
+jobs:
+  scan-cli:
+    name: SonarQube Scan for CLI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - uses: sonarsource/sonarqube-scan-action@master
+        with: 
+          projectBaseDir: ./comp-cli
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_WORKING_DIRECTORY: ./comp-cli
