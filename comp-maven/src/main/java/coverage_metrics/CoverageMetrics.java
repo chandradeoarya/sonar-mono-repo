@@ -25,9 +25,9 @@ public class CoverageMetrics {
   public static void findEvenOdd(int num) {
     // method body
     if (num % 2 == 0)
-      System.out.println(num + " is even");
+      System.out.println(num + " is even number");
     else
-      System.out.println(num + " is odd");
+      System.out.println(num + " is odd number");
   }
 
   public String toString() {
