@@ -2,7 +2,7 @@
 from src.person import Person
 
 def test_fullname():
-    me = Person("Olivier", "Korach")
+    me = Person("Olivier ", "Korach")
     assert me.fullname() == "Olivier Korach"
 
 def test_birthday():
